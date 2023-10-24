@@ -1,16 +1,40 @@
-import { NavLink } from "react-router-dom";
+
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 
 const Navbar = () => {
+    const {user , logOutUser } = useContext(AuthContext);
+    
+    
+
+    const handleLogOut = () =>{
+        logOutUser()
+        .then(() => {
+            console.log("User logout successfully")
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
 
     const navLinks = <>
 
         <li className="mr-5 font-bold"><NavLink to='/'>Home</NavLink></li>
         <li className="mr-5 font-bold"><NavLink to='/addCart'>Add Product</NavLink></li>
         <li className="mr-5 font-bold"><NavLink to='/myCart'>My Cart</NavLink></li>
-
+         {/* {
+            user && 
+            <>
+            <li className="mr-5 font-bold"><NavLink to='/'>About</NavLink></li>
+            <li className="mr-5 font-bold"><NavLink to='/addCart'>Add Product</NavLink></li>
+            </>
+         } */}
 
     </>
+
+    
 
 
     return (
@@ -24,7 +48,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">Automotive</a>
+                <a className=" normal-case text-2xl font-bold">Road<span className="text-orange-600">Masters</span></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className=" menu-horizontal px-1">
@@ -33,16 +57,23 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {/* <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
-                        <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                        
-                    </div>
-                </label> */}
-                <a className="btn">Log in</a>
+                
+               
+                {
+                    user ? <>
+                    <span>{user.displayName }</span>
+                    <button onClick={handleLogOut} className="btn btn-sm">Sign out</button>
+                    </> :
+                    <Link to='/login'><button className="btn btn-sm">Log in</button></Link>
+                }
+                
+                
+                
             </div>
         </div>
     );
 };
 
 export default Navbar;
+
+ {/* <a className="btn">Log in</a> */}

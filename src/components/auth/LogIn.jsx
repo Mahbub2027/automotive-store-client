@@ -1,6 +1,15 @@
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+
 
 const LogIn = () => {
+
+    const {loginUser, googleLogin} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    // const [loginEmailError, setLoginEmailError] = useState();
+    const [loginPassError, setLoginPassError] = useState();
 
     const handleLogin = event =>{
         event.preventDefault();
@@ -8,9 +17,51 @@ const LogIn = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        const user = {email, password};
-        console.log(user);
+        const userDetails = {email, password};
+        console.log(userDetails);
+
+        // loginUser('');
+
+        // setLoginEmailError('');
+        // setLoginPassError('');
+
+        // if(!email){
+        //     setLoginEmailError("Email doesnot match")
+        //     return;
+        // }
+        // else if(!password){
+        //     setLoginPassError("Password doesnot match")
+        //     return;
+        // }
+
+        loginUser(email, password)
+        .then(res => {
+            console.log(res.user)
+            event.target.reset();
+            alert("Login successfully.")
+            navigate('/');
+        })
+        .catch(error => {
+            console.log(error);
+            setLoginPassError("Please provide valid email & password")
+        })
     }
+
+    const handleGoogleLogin = () =>{
+        // const provider = new GoogleAuthProvider();
+        // signInWithPopup(auth, provider)
+    
+        googleLogin()
+        .then(res => {
+            console.log(res.user)
+            alert("User login successfully")
+            navigate('/');
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -27,6 +78,10 @@ const LogIn = () => {
                             </label>
                             <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                         </div>
+                            {/* {
+                                loginEmailError && <p className="text-red-500">{loginEmailError}</p>
+                            } */}
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
@@ -36,8 +91,14 @@ const LogIn = () => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label> */}
                         </div>
+                            {
+                                loginPassError && <p className="text-red-500">{loginPassError}</p>
+                            }
+
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn btn-primary">Login</button> <br />
+                            <button onClick={handleGoogleLogin} className="btn btn-primary">Log in with Google</button>
+
                         </div>
                         <p>New here? Please <Link className="text-blue-500 underline font-semibold" to="/signup">Register</Link></p>
                     </form>

@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const SignUp = () => {
+
+    const { createUser } = useContext(AuthContext);
+    const [registerError, setRegisterError] = useState();
+    const navigate = useNavigate();
 
     const handleSignup = event =>{
         event.preventDefault();
@@ -9,8 +15,36 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        const user = {name,email, password};
-        console.log(user);
+        const userDetails = {name,email, password};
+        console.log(userDetails);
+
+        setRegisterError('');
+
+        if(password.length < 6){
+            setRegisterError("Password should be at least 6 characters")
+            return;
+        }
+        else if(!/[A-Z]/.test(password)){
+            setRegisterError('You should have at least one UPPERCASE letter')
+            return;
+        }
+        else if(!/[!@#$%^&*()_+{}[\]:;<>,.?~\\|-]/.test(password)){
+        // else if(!/[!@#$%^&*]/.test(password)){
+            setRegisterError('You should have at least one special caracter.')
+            return;
+        }
+
+//123456A@ 
+        createUser(email, password)
+        .then(res => {
+            console.log(res.user);
+            event.target.reset();
+            navigate('/');
+        })
+        .catch(error =>{
+            console.log(error)
+            setRegisterError(error.message);
+        })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -43,11 +77,16 @@ const SignUp = () => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label> */}
                         </div>
+                            {
+                                registerError && <p className="text-red-500">{registerError}</p>
+                            }
+
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Register</button>
                         </div>
-                        <p>Already have an account? Please <Link className="text-blue-500 underline font-semibold" to="/signup">Login</Link></p>
+                        <p>Already have an account? Please <Link className="text-blue-500 underline font-semibold" to="/login">Login</Link></p>
                     </form>
+                    
                 </div>
             </div>
         </div>
