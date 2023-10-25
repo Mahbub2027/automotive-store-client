@@ -15,6 +15,8 @@ import AuthProvider from './components/provider/AuthProvider';
 import ErrorPage from './components/ErrorPage';
 import AddProduct from './components/pages/AddProduct/AddProduct';
 import BrandProduct from './components/pages/BrandProduct/BrandProduct';
+import PrivateRoute from './components/Route/PrivateRoute';
+import UpdateProduct from './components/pages/UpdateProduct/UpdateProduct';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,11 +37,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/addProduct',
-        element: <AddProduct></AddProduct>
+        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
       },
       {
         path: '/brandProduct/:id',
-        element: <BrandProduct></BrandProduct>
+        element: <BrandProduct></BrandProduct>,
+        loader: () => fetch(`http://localhost:5000/products`)
+      },
+      {
+        path: '/updateProduct/:id',
+        element: <UpdateProduct></UpdateProduct>,
+        loader: ({params}) => fetch(`http://localhost:5000/${params.id}`)
       }
       
     ]

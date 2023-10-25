@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 
 const LogIn = () => {
 
     const {loginUser, googleLogin} = useContext(AuthContext);
+    const location = useLocation();
     const navigate = useNavigate();
 
     // const [loginEmailError, setLoginEmailError] = useState();
@@ -39,7 +40,7 @@ const LogIn = () => {
             console.log(res.user)
             event.target.reset();
             alert("Login successfully.")
-            navigate('/');
+            navigate(location?.state ? location.state : '/');
         })
         .catch(error => {
             console.log(error);
@@ -55,7 +56,7 @@ const LogIn = () => {
         .then(res => {
             console.log(res.user)
             alert("User login successfully")
-            navigate('/');
+            navigate(location?.state ? location.state : '/');
         })
         .catch(error => {
             console.log(error)

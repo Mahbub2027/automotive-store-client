@@ -12,6 +12,7 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) =>{
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
@@ -22,10 +23,12 @@ const AuthProvider = ({children}) => {
 
     // const provider = new GoogleAuthProvider();
     const googleLogin = () =>{
+        setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
 
     const logOutUser = () =>{
+        setLoading(true);
         return signOut(auth)
     }
 
@@ -44,6 +47,7 @@ const AuthProvider = ({children}) => {
         const unSubscribe = onAuthStateChanged(auth , currentUser =>{
             console.log("Current vlaue of current user")
             setUser(currentUser);
+            setLoading(false);
             
         });
         return () =>{
