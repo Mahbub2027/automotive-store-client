@@ -9,8 +9,8 @@ const Blog = () => {
         .then(data => setBlogData(data))
     },[])
     return (
-        <div className="my-14">
-            <h2 className="text-3xl font-bold text-center mb-8">Latest Blog Posts</h2>
+        <div className="my-20">
+            <h2 className="text-3xl font-bold text-center text-orange-500 mb-14">Latest Blog Posts</h2>
             <Link>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {
