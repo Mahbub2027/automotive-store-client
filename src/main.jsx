@@ -13,6 +13,7 @@ import LogIn from './components/auth/LogIn';
 import SignUp from './components/auth/SignUp';
 import AuthProvider from './components/provider/AuthProvider';
 import ErrorPage from './components/ErrorPage';
+import AddProduct from './components/pages/AddProduct/AddProduct';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp></SignUp>
+      },
+      {
+        path: '/addProduct',
+        element: <AddProduct></AddProduct>
       }
       
     ]

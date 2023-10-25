@@ -38,7 +38,7 @@ const Navbar = () => {
     const navLinks = <>
 
         <li className="mr-5 font-bold"><NavLink to='/'>Home</NavLink></li>
-        <li className="mr-5 font-bold"><NavLink to='/addCart'>Add Product</NavLink></li>
+        <li className="mr-5 font-bold"><NavLink to='/addProduct'>Add Product</NavLink></li>
         <li className="mr-5 font-bold"><NavLink to='/myCart'>My Cart</NavLink></li>
         {/* {
             user && 
