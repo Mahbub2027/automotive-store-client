@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const BrandNames = () => {
     const [brandsData, setBrandsData] = useState([]);
@@ -17,12 +18,14 @@ const BrandNames = () => {
                 {
                     brandsData.map(brand => <p
                         key={brand.id} >
+                        <Link to={`/brandDetails/:id`}> 
                         <div className="card bg-base-100 p-1 shadow-xl">
                             <figure><img className="w-11/12 h-48" src={brand.brand_img} alt="Shoes" /></figure>
                             <div className="card-body">
                                 <h2 className="text-2xl font-bold text-center">{brand.brand_name}</h2> 
                             </div>
                         </div>
+                        </Link>
                     </p>)
                 }
             </div>
