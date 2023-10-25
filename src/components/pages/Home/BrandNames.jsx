@@ -18,7 +18,7 @@ const BrandNames = () => {
                 {
                     brandsData.map(brand => <p
                         key={brand.id} >
-                        <Link to={`/brandDetails/:id`}> 
+                        <Link to={`brandProduct/${brand.id}`}> 
                         <div className="card bg-base-100 p-1 shadow-xl">
                             <figure><img className="w-11/12 h-48" src={brand.brand_img} alt="Shoes" /></figure>
                             <div className="card-body">
