@@ -1,19 +1,19 @@
 # React + Vite
 
 
-# - Vehicle Listings and Search Functionality:
+# &bull; Vehicle Listings and Search Functionality:
 Allow users to browse vehicles based on various criteria such brand name. Provide detailed information with high-quality images, specifications, and pricing information.
-# - User Accounts and Profiles: 
+# &bull; User Accounts and Profiles: 
 Personalized user accounts where users can save preferences, update info, and manage their activity on the website.
-# - User Reviews and Ratings:
+# &bull; User Reviews and Ratings:
 Enable users to leave reviews and ratings for vehicles they have purchased or test-driven. Display these reviews to help potential buyers make informed decisions.
-# - Blog and Articles: 
+# &bull; Blog and Articles: 
 Articles, blog posts, and other content related to automotive topics, including car reviews, maintenance tips, and industry news.
-# - Responsive Design and Mobile Compatibility:
+# &bull; Responsive Design and Mobile Compatibility:
 Responsive Design for various screen sizes and devices, including smartphones and tablets. So users will access the website on mobile devices while on the go.
 
 
-## - [client-side live link](https://automotive-store-eb3dd.web.app)
+## &bull; [client-side live link](https://automotive-store-eb3dd.web.app)
 
 
 
